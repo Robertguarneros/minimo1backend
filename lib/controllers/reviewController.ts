@@ -42,6 +42,21 @@ export class ReviewController {
                  //add to user
                 await this.user_service.addReviewToUser(req.body.author, review_data._id); //
                 return res.status(201).json(review_data);
+            }else if (req.body.title && req.body.content && req.body.stars && req.body.author  && req.body.poi_id ){
+                const review_params:IReview = {
+                    title: req.body.title,
+                    content: req.body.content,
+                    stars: req.body.stars,
+                    author: req.body.author,
+                    poi_id: req.body.poi_id,
+                    review_deactivated: false,
+                    creation_date: new Date(),
+                    modified_date: new Date(),
+                };
+                const review_data = await this.review_service.createReview(review_params);
+                 //add to user
+                await this.user_service.addReviewToUser(req.body.author, review_data._id); //
+                return res.status(201).json(review_data);
             }else{            
                 return res.status(400).json({ error: 'Missing fields' });
             }
@@ -152,6 +167,7 @@ export class ReviewController {
                     author: req.body.author || review_data.author,
                     place_id: req.body.place_id || review_data.place_id,
                     housing_id: req.body.housing_id || review_data.housing_id,
+                    poi_id: req.body.poi_id || review_data.poi_id,
                     review_deactivated: review_data.review_deactivated,
                     creation_date: review_data.creation_date,
                     modified_date: new Date(),
