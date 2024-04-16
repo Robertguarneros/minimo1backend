@@ -2,12 +2,14 @@ import { Request, Response } from 'express';
 import { IReview } from '../modules/reviews/model';
 import ReviewService from '../modules/reviews/service';
 import UserService from '../modules/users/service';
+import PointsOfInterestService from '../modules/pointsOfInterest/service';
 import * as mongoose from 'mongoose';
 
 export class ReviewController {
 
     private review_service: ReviewService = new ReviewService();
     private user_service: UserService = new UserService();
+    private poi_service: PointsOfInterestService = new PointsOfInterestService();
 
     public async create_review(req: Request, res: Response) {
         try{
@@ -56,6 +58,8 @@ export class ReviewController {
                 const review_data = await this.review_service.createReview(review_params);
                  //add to user
                 await this.user_service.addReviewToUser(req.body.author, review_data._id); //
+                await this.poi_service.addReviewToPoI(req.body.poi_id, review_data._id); //
+
                 return res.status(201).json(review_data);
             }else{            
                 return res.status(400).json({ error: 'Missing fields' });

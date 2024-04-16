@@ -1,6 +1,6 @@
 import { IPointOfInterest } from './model';
 import pointsOfInterest from './schema';
-import { FilterQuery } from 'mongoose';
+import { Types } from 'mongoose';
 
 export default class PointsOfInterestService {
     
@@ -8,6 +8,24 @@ export default class PointsOfInterestService {
         try {
             const session = new pointsOfInterest(poi_params);
             return await session.save();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    public async addReviewToPoI(poiId: Types.ObjectId, reviewId: Types.ObjectId): Promise<void> {
+        try {
+            // Retrieve the poi document by ID
+            const poi = await pointsOfInterest.findById(poiId);
+            if (!poi) {
+                throw new Error('Poi not found');
+            }
+
+            // Add the post ID to the user's array of posts
+            poi.reviews.push(reviewId);
+
+            // Save the updated user document
+            await poi.save();
         } catch (error) {
             throw error;
         }
