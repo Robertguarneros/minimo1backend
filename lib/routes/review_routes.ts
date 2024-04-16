@@ -11,13 +11,17 @@ export class ReviewRoutes {
 
     public route(app: Application) {
         
+        // app.post('/review', (req: Request, res: Response, next: NextFunction) => {
+        //     this.AuthJWT.verifyToken(req, res, (err?: any) => {
+        //         if (err) {
+        //             return next(err); // Short-circuit if token verification fails
+        //         }
+        //         this.review_controller.create_review(req, res);
+        //     });
+        // });
+
         app.post('/review', (req: Request, res: Response, next: NextFunction) => {
-            this.AuthJWT.verifyToken(req, res, (err?: any) => {
-                if (err) {
-                    return next(err); // Short-circuit if token verification fails
-                }
-                this.review_controller.create_review(req, res);
-            });
+            this.review_controller.create_review(req, res);
         });
 
         app.get('/review/:id', (req: Request, res: Response, next: NextFunction) => {

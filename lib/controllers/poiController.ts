@@ -14,7 +14,7 @@ export class PoiContoller {
                 && req.body.coords 
                 ) {
                 const poi_params: IPointOfInterest = {
-                    title: req.body.tile,
+                    title: req.body.title,
                     coords:{
                         latitude: req.body.coords.latitude,
                         longitude: req.body.coords.longitude,
