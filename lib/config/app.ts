@@ -9,7 +9,7 @@ import { CommonRoutes } from "../routes/common_routes";
 import { PlaceRoutes } from "../routes/place_routes";
 import { ReviewRoutes } from "../routes/review_routes";
 import { ConversationRoutes } from "../routes/conversation_routes";
-import { PoiRoutes } from "routes/poi_routes";
+import { PoiRoutes } from "../routes/poi_routes";
 
 
 class App {

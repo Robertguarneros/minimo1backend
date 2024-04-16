@@ -1,5 +1,5 @@
-import { Application, Request, Response, NextFunction } from 'express';
-import { PoiContoller } from 'controllers/poiController';
+import { Application, Request, Response } from 'express';
+import { PoiContoller } from '../controllers/poiController';
 import  {authJWT}  from '../middlewares/authJWT';
 import { AuthController } from '../controllers/authController';
 
