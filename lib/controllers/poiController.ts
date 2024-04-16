@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { IPointOfInterest } from '../modules/pointsOfInterest/model';
-import PointsOfInterestService from 'modules/pointsOfInterest/service';
+import PointsOfInterestService from '../modules/pointsOfInterest/service';
 import * as mongoose from 'mongoose';
 
 export class PoiContoller {
